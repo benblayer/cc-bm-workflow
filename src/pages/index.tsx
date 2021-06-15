@@ -23,7 +23,7 @@ const Index: FC = () => {
   } else {
     return (
       <Page>
-        <Page.Header dataHook="app-title" title={t('app.title')} />
+        <Page.Header dataHook="app-title" title="app.title" />
         <Page.Content>
           <Layout>
             <Cell>
