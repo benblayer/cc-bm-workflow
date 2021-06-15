@@ -1,34 +1,56 @@
-import React, { FC } from 'react';
-import { useTranslation, useAppLoaded, Trans } from '@wix/yoshi-flow-bm';
-import { Page, Layout, Cell, Card, Text } from 'wix-style-react';
-
-const introUrl = 'https://github.com/wix-private/business-manager';
+import React, { FC, useState } from 'react';
+import { useAppLoaded, useRequest } from '@wix/yoshi-flow-bm';
+import { Page, Layout, Cell, Card, Text, Input, Button } from 'wix-style-react';
+import { fetchComments, addComments } from '../api/comments.api';
 
 const Index: FC = () => {
   useAppLoaded({ auto: true });
+  const { loading, error, data } = useRequest(fetchComments()); // Not working
+  const [newComment, setNewComment] = useState('');
+  const [currComment, setCurrComment] = useState('');
+  useRequest(addComments(newComment)); // Not working
 
-  const { t } = useTranslation();
+  const addNewComment = () => {
+    setNewComment(newComment);
+    setCurrComment('');
+    setNewComment('');
+  };
 
-  return (
-    <Page>
-      <Page.Header dataHook="app-title" title={t('app.title')} />
-      <Page.Content>
-        <Layout>
-          <Cell>
-            <Card>
-              <Card.Content>
-                <Text dataHook="get-started">
-                  <Trans i18nKey="app.get-started">
-                    GET STARTED <a href={introUrl}>HERE</a>
-                  </Trans>
-                </Text>
-              </Card.Content>
-            </Card>
-          </Cell>
-        </Layout>
-      </Page.Content>
-    </Page>
-  );
+  if (loading) {
+    return <div>Loading ...</div>;
+  } else if (error) {
+    return <div>Error: {error.message}</div>;
+  } else {
+    return (
+      <Page>
+        <Page.Header dataHook="app-title" title={t('app.title')} />
+        <Page.Content>
+          <Layout>
+            <Cell>
+              <Card>
+                <Card.Content>
+                  <Text dataHook="get-started">Received data: {data}</Text>
+                </Card.Content>
+              </Card>
+            </Cell>
+            <Cell>
+              <Card>
+                <Card.Header title="Add a comment"></Card.Header>
+                <Card.Divider></Card.Divider>
+                <Card.Content>
+                  <Input
+                    value={currComment}
+                    onChange={(e) => setCurrComment(e.target.value)}
+                  ></Input>
+                  <Button onClick={addNewComment}></Button>
+                </Card.Content>
+              </Card>
+            </Cell>
+          </Layout>
+        </Page.Content>
+      </Page>
+    );
+  }
 };
 
 export default Index;
