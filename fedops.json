@@ -1,0 +1,14 @@
+[
+  {
+    "appName": "cc-bm-workflow.pages.index",
+    "notifications": {
+      "slack_channels": [
+        "cc-bm-workflow-urgent"
+      ]
+    },
+    "deploy_annotations": [
+      "cc-bm-workflow"
+    ],
+    "ignore_first_request_roundtrip": true
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "moduleId": "CC_BM_WORKFLOW",
+  "appDefinitionId": "d52635b0-dabd-4112-8dd6-958b35d36351",
+  "isCoreService": true,
+  "routeNamespace": "cc-bm-workflow",
+  "translations": {
+    "enabled": true
+  },
+  "sentry": {
+    "DSN": "https://f6fcd26003c54c26b78d8093f189a9b5@sentry.wixpress.com/1764",
+    "id": "f6fcd26003c54c26b78d8093f189a9b5",
+    "projectName": "cc-bm-workflow",
+    "teamName": "cc-bm-sentry"
+  },
+  "experiments": {
+    "scopes": ["cc-bm-workflow"]
+  },
+  "enabledByExperiments": ["specs.infra.yoshi-bm.ChangeMe"]
+}
